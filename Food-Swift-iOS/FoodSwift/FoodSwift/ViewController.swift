@@ -41,6 +41,25 @@ class ViewController: UIViewController {
 //            print(user);
             print("Login as \(user?.displayName)");
         }
+        
+//        let geofireRef = FIRDatabase.database().reference()
+//        let geoFire = GeoFire(firebaseRef: geofireRef)!
+//        
+//        let center = CLLocation(latitude: 35.6930883, longitude: 139.7659818)
+//        let circleQuery = geoFire.query(at: center, withRadius: 100)
+//        circleQuery?.observe(.keyEntered, with: { (key: String?, location: CLLocation?) in
+//            print("\(location?.coordinate.latitude), \(location?.coordinate.longitude)")
+//        })
+//        
+        //        geoFire.getLocationForKey("food", withCallback: { (location, error) in
+        //            if (error != nil) {
+        //                print("An error occurred getting the location for \"firebase-hq\": \(error?.localizedDescription)")
+        //            } else if (location != nil) {
+        //                print("Location for \"firebase-hq\" is [\(location?.coordinate.latitude), \(location?.coordinate.longitude)]")
+        //            } else {
+        //                print("GeoFire does not contain a location for \"firebase-hq\"")
+        //            }
+        //        })
     }
     
     override func viewDidAppear(_ animated: Bool) {
