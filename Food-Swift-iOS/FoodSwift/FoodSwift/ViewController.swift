@@ -12,6 +12,7 @@ import FirebaseFacebookAuthUI
 import GeoFire
 
 let kFirebaseTermsOfService = URL(string: "https://firebase.google.com/terms/")!
+let kDefaultRadius = 1.0;
 
 class ViewController: UIViewController {
 
@@ -112,7 +113,7 @@ class ViewController: UIViewController {
             
             if let currentLocation = FoodLocation.defaultManager.currentLocation {
                 let center = CLLocation(latitude: currentLocation.latitude, longitude: currentLocation.longitude)
-                let circleQuery = geoFire.query(at: center, withRadius: 1000)
+                let circleQuery = geoFire.query(at: center, withRadius: kDefaultRadius)
                 
                 circleQuery?.observe(.keyEntered, with: { (key: String?, location: CLLocation?) in
                     print("\(key) ===== \(location?.coordinate.latitude), \(location?.coordinate.longitude)")

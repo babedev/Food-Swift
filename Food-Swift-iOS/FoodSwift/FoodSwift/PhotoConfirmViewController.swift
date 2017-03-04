@@ -30,6 +30,16 @@ class PhotoConfirmViewController: UIViewController {
         }
         
         self.title = self.placeName;
+        
+        var region = MKCoordinateRegion();
+        region.center = self.location ?? self.mapView.region.center;
+        
+        var span = MKCoordinateSpan();
+        span.latitudeDelta = 0.0015;
+        span.longitudeDelta = 0.0015;
+        region.span = span;
+
+        self.mapView.setRegion(region, animated: true);
     }
 
     override func didReceiveMemoryWarning() {
