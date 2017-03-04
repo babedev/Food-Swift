@@ -81,27 +81,24 @@ class FoodPhoto : NSObject, UIImagePickerControllerDelegate, UINavigationControl
     class func addNewPost(imageURL:URL, location:AnyObject, placeName:String, userID:String, completion:FoodPhotoImagePostFinishBlock? = nil) {
         FoodPhoto.defaultInstance.foodImagePostCompletion = completion;
         
-        let geofireRef = FIRDatabase.database().reference().child("food")
-        let geoFire = GeoFire(firebaseRef: geofireRef)!
-        let itemId = geofireRef.childByAutoId().key
+        let foodRef = FIRDatabase.database().reference().child("food")
+        let locationRef = FIRDatabase.database().reference().child("location")
+        let geoFire = GeoFire(firebaseRef: locationRef)!
+        let itemId = locationRef.childByAutoId().key
         
-        geoFire.setLocation(CLLocation(latitude: 35.6942891, longitude: 139.7649778), forKey: itemId) { (error) in
-            if (error != nil) {
-                print("An error occured: \(error)")
-            } else {
-                let ref = geofireRef.child(itemId)
-                
-                ref.child("imageURL").setValue(imageURL.absoluteString)
-                ref.child("place").setValue(placeName)
-                ref.child("user").setValue(userID)
-                ref.child("rate").setValue(0)
-                
-                ref.observeSingleEvent(of: .childAdded, with: { (snapshot) in
-                    if let completion = FoodPhoto.defaultInstance.foodImagePostCompletion {
-                        completion();
-                    }
-                })
+        let ref = foodRef.child(itemId)
+        
+        ref.child("imageURL").setValue(imageURL.absoluteString)
+        ref.child("place").setValue(placeName)
+        ref.child("user").setValue(userID)
+        ref.child("rate").setValue(0)
+        
+        ref.observeSingleEvent(of: .childAdded, with: { (snapshot) in
+            if let completion = FoodPhoto.defaultInstance.foodImagePostCompletion {
+                completion();
             }
-        }
+        })
+        
+        geoFire.setLocation(CLLocation(latitude: 35.6942891, longitude: 139.7649778), forKey: itemId)
     }
 }
