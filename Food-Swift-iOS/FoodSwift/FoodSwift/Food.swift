@@ -10,10 +10,6 @@ import Foundation
 import CoreLocation
 import ObjectMapper
 
-struct FoodLocation {
-    var lat: Double = 0
-    var lon: Double = 0
-}
 
 struct Food: Mappable {
     

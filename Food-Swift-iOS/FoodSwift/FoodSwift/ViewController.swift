@@ -13,6 +13,7 @@ import Koloda
 import Alamofire
 import AlamofireImage
 import CoreLocation
+import GeoFire
 
 let kFirebaseTermsOfService = URL(string: "https://firebase.google.com/terms/")!
 
@@ -48,6 +49,9 @@ class ViewController: UIViewController {
         
         kolodaView.dataSource = self
         kolodaView.delegate = self        
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil);
+        
+        self.requestLocation();
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,29 +66,9 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated);
         
-        if (self.auth?.currentUser) != nil {
-            if tryLogOut {
-                do {
-                    try self.authUI?.signOut()
-                    self.showLoginView();
-                } catch let error {
-                    // Again, fatalError is not a graceful way to handle errors.
-                    // This error is most likely a network error, so retrying here
-                    // makes sense.
-                    fatalError("Could not sign out: \(error)")
-                }
-            }
-        } else {
+        if self.auth?.currentUser == nil {
             self.showLoginView();
         }
-    }
-    
-    func showLoginView() {
-        tryLogOut = false;
-        
-        let controller = self.authUI!.authViewController()
-        //        controller.navigationBar.isHidden = self.customAuthorizationSwitch.isOn
-        self.present(controller, animated: true, completion: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -180,6 +164,64 @@ extension ViewController: KolodaViewDelegate {
                 location = placemark[0].locality ?? ""
             }
         }*/
+    }
+    // 35.6942891, 139.7649778
+    
+    // MARK:
+    // MARK: New post
+
+    @IBAction func addNewPost(_ sender: Any) {
+        if let currentUser = self.auth?.currentUser {
+            if let currentLocation = FoodLocation.defaultManager.currentLocation {
+                let imagePicker = FoodPhoto.imagePickerViewController { (image, error) in
+                    if let selectedImage = image {
+                        if let photoConfirmView = self.storyboard?.instantiateViewController(withIdentifier: "PhotoConfirmViewController") as? PhotoConfirmViewController {
+                            photoConfirmView.image = selectedImage;
+                            photoConfirmView.userID = currentUser.uid;
+                            photoConfirmView.location = currentLocation;
+                            self.navigationController?.pushViewController(photoConfirmView, animated: false);
+                            self.dismiss(animated: true, completion: nil);
+                        }
+                    } else {
+                        self.dismiss(animated: true, completion: nil);
+                    }
+                };
+                
+                self.present(imagePicker, animated: true, completion: nil);
+            }
+        }
+    }
+
+    // MARK:
+    // MARK: Authentication
+
+    func showLoginView() {
+        tryLogOut = false;
+        
+        let controller = self.authUI!.authViewController()
+        //        controller.navigationBar.isHidden = self.customAuthorizationSwitch.isOn
+        self.present(controller, animated: true, completion: nil)
+    }
+    
+    // MARK:
+    // MARK: Location
+    
+    func requestLocation() {
+        FoodLocation.defaultManager.requestLocation { (place) in
+            print("You are near \(place)");
+            
+            let geofireRef = FIRDatabase.database().reference().child("location")
+            let geoFire = GeoFire(firebaseRef: geofireRef)!
+            
+            if let currentLocation = FoodLocation.defaultManager.currentLocation {
+                let center = CLLocation(latitude: currentLocation.latitude, longitude: currentLocation.longitude)
+                let circleQuery = geoFire.query(at: center, withRadius: 1000)
+                
+                circleQuery?.observe(.keyEntered, with: { (key: String?, location: CLLocation?) in
+                    print("\(key) ===== \(location?.coordinate.latitude), \(location?.coordinate.longitude)")
+                })
+            }
+        }
     }
 }
 
