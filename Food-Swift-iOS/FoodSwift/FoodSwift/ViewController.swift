@@ -29,6 +29,7 @@ class ViewController: UIViewController {
         self.authUI?.isSignInWithEmailHidden = true;
         self.authUI?.providers = [FUIFacebookAuth()];
         
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil);
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,19 +46,22 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated);
         
-        if (self.auth?.currentUser) != nil {
-            if tryLogOut {
-                do {
-                    try self.authUI?.signOut()
-                    self.showLoginView();
-                } catch let error {
-                    // Again, fatalError is not a graceful way to handle errors.
-                    // This error is most likely a network error, so retrying here
-                    // makes sense.
-                    fatalError("Could not sign out: \(error)")
-                }
-            }
-        } else {
+//        if (self.auth?.currentUser) != nil {
+//            if tryLogOut {
+//                do {
+//                    try self.authUI?.signOut()
+//                    self.showLoginView();
+//                } catch let error {
+//                    // Again, fatalError is not a graceful way to handle errors.
+//                    // This error is most likely a network error, so retrying here
+//                    // makes sense.
+//                    fatalError("Could not sign out: \(error)")
+//                }
+//            }
+//        } else {
+//            self.showLoginView();
+//        }
+        if self.auth?.currentUser == nil {
             self.showLoginView();
         }
     }
@@ -85,24 +89,13 @@ class ViewController: UIViewController {
         if let currentUser = self.auth?.currentUser {
             let imagePicker = FoodPhoto.imagePickerViewController { (image, error) in
                 if let selectedImage = image {
-                    print("Start upload");
-                    FoodPhoto.uploadImage(image: selectedImage, completion: { (url, error) in
-                        print("Finish upload");
-                        if let photoURL = url {
-                            print("Got url \(photoURL)");
-                            FoodPhoto.addNewPost(
-                                imageURL: photoURL,
-                                location: "" as AnyObject,
-                                placeName: "五ノ神水産",
-                                userID: currentUser.uid,
-                                completion: { Void in
-                                    self.dismiss(animated: true, completion: nil);
-                                }
-                            );
-                        } else {
-                            print("Finish upload with error - \(error)");
-                        }
-                    })
+                    if let photoConfirmView = self.storyboard?.instantiateViewController(withIdentifier: "PhotoConfirmViewController") as? PhotoConfirmViewController {
+                        photoConfirmView.image = selectedImage;
+                        photoConfirmView.userID = currentUser.uid;
+                        self.navigationController?.pushViewController(photoConfirmView, animated: false);
+                        self.dismiss(animated: true, completion: nil);
+                    }
+
                 }
             };
             

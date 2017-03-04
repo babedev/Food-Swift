@@ -56,6 +56,7 @@ PODS:
   - Koloda (4.0):
     - pop (~> 1.0)
   - pop (1.0.9)
+  - SVProgressHUD (2.1.2)
 
 DEPENDENCIES:
   - Firebase/Auth
@@ -63,6 +64,7 @@ DEPENDENCIES:
   - Firebase/Storage
   - FirebaseUI/Facebook (~> 3.0)
   - Koloda
+  - SVProgressHUD
 
 SPEC CHECKSUMS:
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
@@ -80,7 +82,8 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 6f8d8b28b7e345549ac471071608170b31cb4977
   Koloda: cb171633afc6182a77821b7951e38b2cb272ba7c
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
+  SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
 
-PODFILE CHECKSUM: 0647bd6a6c27a6b005a726d04b20c3e22eb044d1
+PODFILE CHECKSUM: 0c9dcf2b534b8b758420a9de91a826b0b0d6121e
 
 COCOAPODS: 1.2.0
