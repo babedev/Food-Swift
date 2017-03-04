@@ -13,6 +13,9 @@
 		3CFAF7591E6A5DF600AD0AE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3CFAF7581E6A5DF600AD0AE6 /* Assets.xcassets */; };
 		3CFAF75C1E6A5DF600AD0AE6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CFAF75A1E6A5DF600AD0AE6 /* LaunchScreen.storyboard */; };
 		3CFAF87F1E6A78C400AD0AE6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3CFAF87E1E6A78C400AD0AE6 /* GoogleService-Info.plist */; };
+		C416FDAF1E6A89D5000E131A /* CustomKolodaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C416FDAD1E6A89D5000E131A /* CustomKolodaView.swift */; };
+		C416FDB01E6A89D5000E131A /* Food.swift in Sources */ = {isa = PBXBuildFile; fileRef = C416FDAE1E6A89D5000E131A /* Food.swift */; };
+		C416FDB41E6AA959000E131A /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C416FDB31E6AA959000E131A /* MapViewController.swift */; };
 		DAFFB12C1DFC88CD3AD32029 /* Pods_FoodSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A1855300863F34E216CF984 /* Pods_FoodSwift.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +30,9 @@
 		3CFAF87E1E6A78C400AD0AE6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4A1855300863F34E216CF984 /* Pods_FoodSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoodSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF22E3516F2D83D5D6747CC1 /* Pods-FoodSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodSwift.release.xcconfig"; path = "Pods/Target Support Files/Pods-FoodSwift/Pods-FoodSwift.release.xcconfig"; sourceTree = "<group>"; };
+		C416FDAD1E6A89D5000E131A /* CustomKolodaView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomKolodaView.swift; sourceTree = "<group>"; };
+		C416FDAE1E6A89D5000E131A /* Food.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Food.swift; sourceTree = "<group>"; };
+		C416FDB31E6AA959000E131A /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		EC64AA7C40ADBBB4E22AA4FF /* Pods-FoodSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodSwift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FoodSwift/Pods-FoodSwift.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -64,12 +70,15 @@
 		3CFAF7501E6A5DF600AD0AE6 /* FoodSwift */ = {
 			isa = PBXGroup;
 			children = (
+				C416FDAD1E6A89D5000E131A /* CustomKolodaView.swift */,
+				C416FDAE1E6A89D5000E131A /* Food.swift */,
 				3CFAF7511E6A5DF600AD0AE6 /* AppDelegate.swift */,
 				3CFAF7531E6A5DF600AD0AE6 /* ViewController.swift */,
 				3CFAF7551E6A5DF600AD0AE6 /* Main.storyboard */,
 				3CFAF7581E6A5DF600AD0AE6 /* Assets.xcassets */,
 				3CFAF75A1E6A5DF600AD0AE6 /* LaunchScreen.storyboard */,
 				3CFAF75D1E6A5DF600AD0AE6 /* Info.plist */,
+				C416FDB31E6AA959000E131A /* MapViewController.swift */,
 			);
 			path = FoodSwift;
 			sourceTree = "<group>";
@@ -217,6 +226,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				3CFAF7541E6A5DF600AD0AE6 /* ViewController.swift in Sources */,
+				C416FDAF1E6A89D5000E131A /* CustomKolodaView.swift in Sources */,
+				C416FDB01E6A89D5000E131A /* Food.swift in Sources */,
+				C416FDB41E6AA959000E131A /* MapViewController.swift in Sources */,
 				3CFAF7521E6A5DF600AD0AE6 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

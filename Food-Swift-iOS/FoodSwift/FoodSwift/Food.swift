@@ -10,11 +10,17 @@ import Foundation
 import CoreLocation
 import ObjectMapper
 
+struct FoodLocation {
+    var lat: Double = 0
+    var lon: Double = 0
+}
+
 struct Food: Mappable {
     
+    var uid: String = ""
     var g: String = ""
     var imageURL: String = ""
-    var location: CLLocationCoordinate2D = CLLocationCoordinate2D()
+    var location: [Double]?
     var place: String = ""
     var rate: Int = 0
     
@@ -24,6 +30,7 @@ struct Food: Mappable {
         g <- map["g"]
         imageURL <- map["imageURL"]
         location <- map["l"]
+//        dump(map["l"])
         place <- map["place"]
         rate <- map["rate"]        
     }
