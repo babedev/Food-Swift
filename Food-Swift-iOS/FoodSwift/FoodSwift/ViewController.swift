@@ -50,6 +50,8 @@ class ViewController: UIViewController {
         kolodaView.dataSource = self
         kolodaView.delegate = self        
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil);
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: "addNewPost:");
+        self.title = "food! Swift";
         
         self.requestLocation();
     }
