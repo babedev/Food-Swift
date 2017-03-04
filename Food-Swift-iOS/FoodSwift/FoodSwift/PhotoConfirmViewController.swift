@@ -13,6 +13,8 @@ import SVProgressHUD
 class PhotoConfirmViewController: UIViewController {
     var image:UIImage?
     var userID = "";
+    var location:CLLocationCoordinate2D?
+    var placeName = "";
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var mapView: MKMapView!
@@ -22,6 +24,12 @@ class PhotoConfirmViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         self.imageView.image = self.image;
+        
+        if let place = FoodLocation.defaultManager.currentPlace?.name {
+            self.placeName = place;
+        }
+        
+        self.title = self.placeName;
     }
 
     override func didReceiveMemoryWarning() {
@@ -40,8 +48,8 @@ class PhotoConfirmViewController: UIViewController {
                     print("Got url \(photoURL)");
                     FoodPhoto.addNewPost(
                         imageURL: photoURL,
-                        location: "" as AnyObject,
-                        placeName: "五ノ神水産",
+                        location: self.location ?? CLLocationCoordinate2DMake(0.0, 0.0),
+                        placeName: self.placeName,
                         userID: self.userID,
                         completion: { Void in
                             self.dismiss(animated: true, completion: nil);
