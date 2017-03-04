@@ -78,7 +78,7 @@ class FoodPhoto : NSObject, UIImagePickerControllerDelegate, UINavigationControl
         }
     }
     
-    class func addNewPost(imageURL:URL, location:AnyObject, placeName:String, userID:String, completion:FoodPhotoImagePostFinishBlock? = nil) {
+    class func addNewPost(imageURL:URL, location:CLLocationCoordinate2D, placeName:String, userID:String, completion:FoodPhotoImagePostFinishBlock? = nil) {
         FoodPhoto.defaultInstance.foodImagePostCompletion = completion;
         
         let foodRef = FIRDatabase.database().reference().child("food")
@@ -99,6 +99,6 @@ class FoodPhoto : NSObject, UIImagePickerControllerDelegate, UINavigationControl
             }
         })
         
-        geoFire.setLocation(CLLocation(latitude: 35.6942891, longitude: 139.7649778), forKey: itemId)
+        geoFire.setLocation(CLLocation(latitude: location.latitude, longitude: location.longitude), forKey: itemId)
     }
 }

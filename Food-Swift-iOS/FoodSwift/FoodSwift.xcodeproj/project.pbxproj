@@ -14,6 +14,8 @@
 		3CFAF75C1E6A5DF600AD0AE6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CFAF75A1E6A5DF600AD0AE6 /* LaunchScreen.storyboard */; };
 		3CFAF87F1E6A78C400AD0AE6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3CFAF87E1E6A78C400AD0AE6 /* GoogleService-Info.plist */; };
 		3CFAF8841E6A84F000AD0AE6 /* FoodPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFAF8831E6A84F000AD0AE6 /* FoodPhoto.swift */; };
+		3CFAF8871E6A9A0E00AD0AE6 /* PhotoConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFAF8861E6A9A0E00AD0AE6 /* PhotoConfirmViewController.swift */; };
+		3CFAF88A1E6AA7B800AD0AE6 /* FoodLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFAF8891E6AA7B800AD0AE6 /* FoodLocation.swift */; };
 		DAFFB12C1DFC88CD3AD32029 /* Pods_FoodSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A1855300863F34E216CF984 /* Pods_FoodSwift.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +29,8 @@
 		3CFAF75D1E6A5DF600AD0AE6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3CFAF87E1E6A78C400AD0AE6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3CFAF8831E6A84F000AD0AE6 /* FoodPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodPhoto.swift; sourceTree = "<group>"; };
+		3CFAF8861E6A9A0E00AD0AE6 /* PhotoConfirmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoConfirmViewController.swift; sourceTree = "<group>"; };
+		3CFAF8891E6AA7B800AD0AE6 /* FoodLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodLocation.swift; sourceTree = "<group>"; };
 		4A1855300863F34E216CF984 /* Pods_FoodSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoodSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF22E3516F2D83D5D6747CC1 /* Pods-FoodSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodSwift.release.xcconfig"; path = "Pods/Target Support Files/Pods-FoodSwift/Pods-FoodSwift.release.xcconfig"; sourceTree = "<group>"; };
 		EC64AA7C40ADBBB4E22AA4FF /* Pods-FoodSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodSwift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FoodSwift/Pods-FoodSwift.debug.xcconfig"; sourceTree = "<group>"; };
@@ -69,6 +73,7 @@
 				3CFAF8801E6A84D400AD0AE6 /* Photo Module */,
 				3CFAF7511E6A5DF600AD0AE6 /* AppDelegate.swift */,
 				3CFAF7531E6A5DF600AD0AE6 /* ViewController.swift */,
+				3CFAF8861E6A9A0E00AD0AE6 /* PhotoConfirmViewController.swift */,
 				3CFAF7551E6A5DF600AD0AE6 /* Main.storyboard */,
 				3CFAF7581E6A5DF600AD0AE6 /* Assets.xcassets */,
 				3CFAF75A1E6A5DF600AD0AE6 /* LaunchScreen.storyboard */,
@@ -81,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				3CFAF8831E6A84F000AD0AE6 /* FoodPhoto.swift */,
+				3CFAF8891E6AA7B800AD0AE6 /* FoodLocation.swift */,
 			);
 			path = "Photo Module";
 			sourceTree = "<group>";
@@ -227,7 +233,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CFAF8871E6A9A0E00AD0AE6 /* PhotoConfirmViewController.swift in Sources */,
 				3CFAF7541E6A5DF600AD0AE6 /* ViewController.swift in Sources */,
+				3CFAF88A1E6AA7B800AD0AE6 /* FoodLocation.swift in Sources */,
 				3CFAF8841E6A84F000AD0AE6 /* FoodPhoto.swift in Sources */,
 				3CFAF7521E6A5DF600AD0AE6 /* AppDelegate.swift in Sources */,
 			);
