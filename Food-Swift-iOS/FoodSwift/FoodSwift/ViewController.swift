@@ -81,6 +81,34 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func addNewPost(_ sender: Any) {
+        if let currentUser = self.auth?.currentUser {
+            let imagePicker = FoodPhoto.imagePickerViewController { (image, error) in
+                if let selectedImage = image {
+                    print("Start upload");
+                    FoodPhoto.uploadImage(image: selectedImage, completion: { (url, error) in
+                        print("Finish upload");
+                        if let photoURL = url {
+                            print("Got url \(photoURL)");
+                            FoodPhoto.addNewPost(
+                                imageURL: photoURL,
+                                location: "" as AnyObject,
+                                placeName: "五ノ神水産",
+                                userID: currentUser.uid,
+                                completion: { Void in
+                                    self.dismiss(animated: true, completion: nil);
+                                }
+                            );
+                        } else {
+                            print("Finish upload with error - \(error)");
+                        }
+                    })
+                }
+            };
+            
+            self.present(imagePicker, animated: true, completion: nil);
+        }
+    }
 
 }
 
