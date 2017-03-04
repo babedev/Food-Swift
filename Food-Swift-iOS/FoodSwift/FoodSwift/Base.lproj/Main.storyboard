@@ -1,14 +1,18 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="FoodSwift" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -16,11 +20,90 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3CT-De-HOx" customClass="CustomKolodaView" customModule="FoodSwift" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="467"/>
+                                <color key="backgroundColor" red="0.8701099537037037" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XbT-SY-smI">
+                                <rect key="frame" x="0.0" y="475" width="375" height="192"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bIm-OB-vWo">
+                                        <rect key="frame" x="46" y="13.5" width="321" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PinIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Mqg-QB-mb3">
+                                        <rect key="frame" x="8" y="8" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="QAn-rc-2CN"/>
+                                            <constraint firstAttribute="height" constant="30" id="nha-bm-bSk"/>
+                                        </constraints>
+                                    </imageView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="eT0-Ce-2zY">
+                                        <rect key="frame" x="0.0" y="70" width="375" height="60"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zdk-Ki-JY8">
+                                                <rect key="frame" x="0.0" y="0.0" width="187.5" height="60"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="60" id="y6s-qX-q65"/>
+                                                </constraints>
+                                                <state key="normal" image="CrossIcon"/>
+                                                <connections>
+                                                    <action selector="tapLeftButton" destination="BYZ-38-t0r" eventType="touchUpInside" id="U6T-iq-3U2"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TLz-Ac-Qkn">
+                                                <rect key="frame" x="187.5" y="0.0" width="187.5" height="60"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="60" id="QUW-jf-a9m"/>
+                                                </constraints>
+                                                <state key="normal" image="CheckMarkIcon"/>
+                                                <connections>
+                                                    <action selector="tapRightButton" destination="BYZ-38-t0r" eventType="touchUpInside" id="gmI-7i-oxG"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="bIm-OB-vWo" firstAttribute="centerY" secondItem="Mqg-QB-mb3" secondAttribute="centerY" id="36P-0J-HmT"/>
+                                    <constraint firstItem="bIm-OB-vWo" firstAttribute="leading" secondItem="Mqg-QB-mb3" secondAttribute="trailing" constant="8" id="Ers-nx-p6U"/>
+                                    <constraint firstAttribute="trailing" secondItem="eT0-Ce-2zY" secondAttribute="trailing" id="ExW-1P-mLS"/>
+                                    <constraint firstItem="Mqg-QB-mb3" firstAttribute="top" secondItem="XbT-SY-smI" secondAttribute="top" constant="8" id="MxI-jC-mvI"/>
+                                    <constraint firstItem="Mqg-QB-mb3" firstAttribute="leading" secondItem="XbT-SY-smI" secondAttribute="leading" constant="8" id="O72-0t-1Dd"/>
+                                    <constraint firstItem="eT0-Ce-2zY" firstAttribute="top" secondItem="Mqg-QB-mb3" secondAttribute="bottom" constant="32" id="s5n-HE-EyP"/>
+                                    <constraint firstItem="eT0-Ce-2zY" firstAttribute="leading" secondItem="XbT-SY-smI" secondAttribute="leading" id="wKm-Hr-EVv"/>
+                                    <constraint firstAttribute="trailing" secondItem="bIm-OB-vWo" secondAttribute="trailing" constant="8" id="zc2-dU-V1x"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="3CT-De-HOx" secondAttribute="bottom" constant="200" id="4kW-hY-bD6"/>
+                            <constraint firstAttribute="trailing" secondItem="XbT-SY-smI" secondAttribute="trailing" id="A8h-xw-Fbb"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="XbT-SY-smI" secondAttribute="bottom" id="BYo-0J-q3s"/>
+                            <constraint firstItem="3CT-De-HOx" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="QKa-71-tcV"/>
+                            <constraint firstItem="XbT-SY-smI" firstAttribute="top" secondItem="3CT-De-HOx" secondAttribute="bottom" constant="8" id="SiC-Mn-LfC"/>
+                            <constraint firstItem="3CT-De-HOx" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="dGB-XF-6mz"/>
+                            <constraint firstItem="XbT-SY-smI" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="q0E-Zt-hb4"/>
+                            <constraint firstAttribute="trailing" secondItem="3CT-De-HOx" secondAttribute="trailing" id="uyB-lM-bDd"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="kolodaView" destination="3CT-De-HOx" id="5lL-tb-pmk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="32.799999999999997" y="54.422788605697157"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="CheckMarkIcon" width="52" height="52"/>
+        <image name="CrossIcon" width="52" height="52"/>
+        <image name="PinIcon" width="25" height="25"/>
+    </resources>
 </document>
