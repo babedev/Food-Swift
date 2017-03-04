@@ -7,92 +7,80 @@
 //
 
 import UIKit
-import Koloda
-import Alamofire
-import AlamofireImage
 import Firebase
+import FirebaseFacebookAuthUI
 
-let dirRef = FIRDatabase.database().reference(withPath: "food")
+let kFirebaseTermsOfService = URL(string: "https://firebase.google.com/terms/")!
 
 class ViewController: UIViewController {
+
+    var auth: FIRAuth?;// = FIRAuth.auth()
+    var authUI: FUIAuth? ;//= FUIAuth.defaultAuthUI()
+    var handle: FIRAuthStateDidChangeListenerHandle?
+    var tryLogOut = true;
     
-    @IBOutlet weak var kolodaView: CustomKolodaView!
-
-    var foods: [Food] = []
-
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        self.auth = FIRAuth.auth();
+        self.authUI = FUIAuth.defaultAuthUI();
         
-        dirRef.queryOrdered(byChild: "rate").observeSingleEvent(of: .value, with: { [unowned self] (snapshot) in
-            guard let dir = snapshot.value as? [String: Any] else {
-                return
+        self.authUI?.tosurl = kFirebaseTermsOfService
+        self.authUI?.isSignInWithEmailHidden = true;
+        self.authUI?.providers = [FUIFacebookAuth()];
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated);
+        
+        handle = self.auth?.addStateDidChangeListener() { (auth, user) in
+            // ...
+//            print(auth);
+//            print(user);
+            print("Login as \(user?.displayName)");
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated);
+        
+        if (self.auth?.currentUser) != nil {
+            if tryLogOut {
+                do {
+                    try self.authUI?.signOut()
+                    self.showLoginView();
+                } catch let error {
+                    // Again, fatalError is not a graceful way to handle errors.
+                    // This error is most likely a network error, so retrying here
+                    // makes sense.
+                    fatalError("Could not sign out: \(error)")
+                }
             }
-            
-            for key in dir.keys {
-                guard let json = dir[key] as? [String:Any] else { return }
-                let food = Food(JSON: json)
-                self.foods.append(food!)
-            }
-            self.kolodaView.reloadData()
-        })
+        } else {
+            self.showLoginView();
+        }
+    }
+    
+    func showLoginView() {
+        tryLogOut = false;
         
-/*        let food = Food()
-        food.g = "w4rqpsh8de"
-        food.imageURL = "https://firebasestorage.googleapis.com/v0/b/foodswift-fa506.appspot.com/o/food2.jpg?alt=media&token=2568a669-05b8-4d99-9423-b569497c87f0"
+        let controller = self.authUI!.authViewController()
+        //        controller.navigationBar.isHidden = self.customAuthorizationSwitch.isOn
+        self.present(controller, animated: true, completion: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated);
         
-        let food2 = Food()
-        food2.g = "w4rqpsh8de"
-        food2.imageURL = "https://firebasestorage.googleapis.com/v0/b/foodswift-fa506.appspot.com/o/food2.jpg?alt=media&token=2568a669-05b8-4d99-9423-b569497c87f0"        
-        foods += [food, food2]*/
-        
-//        imageView.af_setImage(withURL: URL(string: "https://firebasestorage.googleapis.com/v0/b/foodswift-fa506.appspot.com/o/food2.jpg?alt=media&token=2568a669-05b8-4d99-9423-b569497c87f0")!)
-        
-        kolodaView.dataSource = self
-        kolodaView.delegate = self
+        FIRAuth.auth()?.removeStateDidChangeListener(handle!)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    @IBAction func tapLeftButton() {
-        kolodaView?.swipe(.left)
-    }
-    
-    @IBAction func tapRightButton() {
-        kolodaView?.swipe(.right)
-    }
+
 
 }
 
-
-extension ViewController: KolodaViewDelegate {
-    func kolodaDidRunOutOfCards(koloda: KolodaView) {
-//        foods.reset()
-    }
-    
-    func koloda(koloda: KolodaView, didSelectCardAt index: Int) {
-//        UIApplication.shared.openURL(NSURL(string: "https://yalantis.com/")! as URL)
-    }
-}
-
-extension ViewController: KolodaViewDataSource {
-    
-    func kolodaNumberOfCards(_ koloda:KolodaView) -> Int {
-        return foods.count
-    }
-    
-    func koloda(_ koloda: KolodaView, viewForCardAt index: Int) -> UIView {
-        let view = UIImageView()
-        let urlString = foods[index].imageURL
-        view.af_setImage(withURL: URL(string: urlString)!)
-        return view
-    }
-    
-    func koloda(koloda: KolodaView, viewForCardOverlayAt index: Int) -> OverlayView? {
-        return Bundle.main.loadNibNamed("OverlayView", owner: self, options: nil)?[0] as? OverlayView
-    }
-    
-}
