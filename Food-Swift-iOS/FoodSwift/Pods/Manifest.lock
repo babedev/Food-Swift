@@ -1,4 +1,7 @@
 PODS:
+  - Alamofire (4.4.0)
+  - AlamofireImage (3.2.0):
+    - Alamofire (~> 4.1)
   - Bolts (1.8.4):
     - Bolts/AppLinks (= 1.8.4)
     - Bolts/Tasks (= 1.8.4)
@@ -55,16 +58,22 @@ PODS:
   - GTMSessionFetcher/Core (1.1.8)
   - Koloda (4.0):
     - pop (~> 1.0)
+  - ObjectMapper (2.2.5)
   - pop (1.0.9)
 
 DEPENDENCIES:
+  - Alamofire
+  - AlamofireImage
   - Firebase/Auth
   - Firebase/Database
   - Firebase/Storage
   - FirebaseUI/Facebook (~> 3.0)
   - Koloda
+  - ObjectMapper
 
 SPEC CHECKSUMS:
+  Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
+  AlamofireImage: 157ed682cc81d3b9db4fb90c1f12180ac552d93b
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   FBSDKCoreKit: 2d16979b28fe28c2b95af0d275ad5f9703c6c8de
   FBSDKLoginKit: a9d9391506c687e2304a590bf9312837fce7f375
@@ -79,8 +88,9 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMSessionFetcher: 6f8d8b28b7e345549ac471071608170b31cb4977
   Koloda: cb171633afc6182a77821b7951e38b2cb272ba7c
+  ObjectMapper: fb30f71e08470d1e5a20b199fafe1246281db898
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
 
-PODFILE CHECKSUM: 0647bd6a6c27a6b005a726d04b20c3e22eb044d1
+PODFILE CHECKSUM: dc024b900ceee95b78dfd6ee3736cdc253b30eb8
 
 COCOAPODS: 1.2.0.beta.1
