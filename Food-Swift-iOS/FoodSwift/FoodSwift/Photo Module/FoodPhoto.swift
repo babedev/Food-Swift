@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import FirebaseStorage
 import FirebaseDatabase
+import GeoFire
 
 class FoodPhoto : NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -80,22 +81,27 @@ class FoodPhoto : NSObject, UIImagePickerControllerDelegate, UINavigationControl
     class func addNewPost(imageURL:URL, location:AnyObject, placeName:String, userID:String, completion:FoodPhotoImagePostFinishBlock? = nil) {
         FoodPhoto.defaultInstance.foodImagePostCompletion = completion;
         
-        let ref = FoodPhoto.defaultInstance.foodRootRef.child("food").childByAutoId()
-        ref.setValue(
-            [
-            "g" : "w8rpojks10e",
-            "imageURL" : imageURL.absoluteString,
-            "l" : [ 35.6937489, 139.7687731 ],
-            "place" : placeName,
-            "user" : userID,
-            "rate" : 0
-            ]
-        )
+        let geofireRef = FIRDatabase.database().reference().child("food")
+        let geoFire = GeoFire(firebaseRef: geofireRef)!
+        let itemId = geofireRef.childByAutoId().key
         
-        ref.observeSingleEvent(of: .childAdded, with: { (snapshot) in
-            if let completion = FoodPhoto.defaultInstance.foodImagePostCompletion {
-                completion();
+        geoFire.setLocation(CLLocation(latitude: 35.6942891, longitude: 139.7649778), forKey: itemId) { (error) in
+            if (error != nil) {
+                print("An error occured: \(error)")
+            } else {
+                let ref = geofireRef.child(itemId)
+                
+                ref.child("imageURL").setValue(imageURL.absoluteString)
+                ref.child("place").setValue(placeName)
+                ref.child("user").setValue(userID)
+                ref.child("rate").setValue(0)
+                
+                ref.observeSingleEvent(of: .childAdded, with: { (snapshot) in
+                    if let completion = FoodPhoto.defaultInstance.foodImagePostCompletion {
+                        completion();
+                    }
+                })
             }
-        })
+        }
     }
 }
